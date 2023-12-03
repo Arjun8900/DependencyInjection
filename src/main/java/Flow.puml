@@ -1,0 +1,15 @@
+@startuml
+participant "Main" as m
+participant "DiscountGuiceModule" as dgm
+participant "Discountable" as dis
+participant "CheckoutService" as cs
+
+m -> dgm: Inject
+dgm -> dis: binds Interface \nwith Concrete class
+m -> cs: Creates instance
+cs -> dis: Uses the Injected concrete class,\nthat is done by "DiscountGuiceModule"
+
+
+
+
+@enduml

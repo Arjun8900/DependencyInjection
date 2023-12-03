@@ -1,0 +1,39 @@
+@startuml
+allowmixing
+
+interface "Discountable" as dis{
+    +getDiscount()
+}
+
+class "EarlyBirdDiscount" as ebd implements dis {
+    +getDiscount()
+}
+
+class "NightOwlDiscount" as nod implements dis{
+    +getDiscount()
+}
+
+abstract "com.google.inject.AbstractModule" as gab {
+}
+class "DiscountGuiceModule" as dgm extends gab {
+    *configure()
+}
+
+class "CheckoutService" as cs {
+    +CheckoutService(Discountable)
+    +double checkout(double amount)
+}
+cs::CheckoutService *- dis
+
+dis - dgm::configure
+
+class "Main" as m {
+}
+dgm -* m
+cs -* m
+
+
+
+
+
+@enduml
